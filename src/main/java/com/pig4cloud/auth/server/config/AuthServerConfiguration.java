@@ -67,7 +67,10 @@ public class AuthServerConfiguration {
 				.clientId("pig")
 				.clientSecret("pig")
 				.clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
-				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+				.authorizationGrantTypes(authorizationGrantTypes -> {
+					authorizationGrantTypes.add(AuthorizationGrantType.AUTHORIZATION_CODE);
+					authorizationGrantTypes.add(AuthorizationGrantType.REFRESH_TOKEN);
+				})
 				.redirectUri("http://localhost:8080/renren-admin/sys/oauth2-sso")
 				.build();
 		return new InMemoryRegisteredClientRepository(client);
