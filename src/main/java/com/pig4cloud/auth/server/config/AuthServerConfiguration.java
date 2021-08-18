@@ -43,15 +43,14 @@ import java.util.UUID;
 @EnableWebSecurity
 public class AuthServerConfiguration {
 
+	@Bean
+	@Order(Ordered.HIGHEST_PRECEDENCE)
+	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
+		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
+		return http.formLogin(Customizer.withDefaults()).build();
+	}
 
-    @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
-    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
-        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-        return http.formLogin(Customizer.withDefaults()).build();
-    }
-
-    // @formatter:off
+	// @formatter:off
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
         RegisteredClient client = RegisteredClient.withId("pig")
@@ -68,16 +67,16 @@ public class AuthServerConfiguration {
     }
     // @formatter:on
 
-    @Bean
-    @SneakyThrows
-    public JWKSource<SecurityContext> jwkSource() {
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-        keyPairGenerator.initialize(2048);
-        KeyPair keyPair = keyPairGenerator.generateKeyPair();
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+	@Bean
+	@SneakyThrows
+	public JWKSource<SecurityContext> jwkSource() {
+		KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+		keyPairGenerator.initialize(2048);
+		KeyPair keyPair = keyPairGenerator.generateKeyPair();
+		RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
+		RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
 
-        // @formatter:off
+		// @formatter:off
         RSAKey rsaKey= new RSAKey.Builder(publicKey)
                 .privateKey(privateKey)
                 .keyID(UUID.randomUUID().toString())

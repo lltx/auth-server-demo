@@ -15,6 +15,7 @@
 	<description>spring security oauth server </description>
 	<properties>
 		<java.version>11</java.version>
+		<spring.checkstyle.plugin>0.0.28</spring.checkstyle.plugin>
 	</properties>
 	<dependencies>
 
@@ -59,6 +60,12 @@
 
 	<build>
 		<plugins>
+			<!--代码格式插件，默认使用spring 规则-->
+			<plugin>
+				<groupId>io.spring.javaformat</groupId>
+				<artifactId>spring-javaformat-maven-plugin</artifactId>
+				<version>${spring.checkstyle.plugin}</version>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

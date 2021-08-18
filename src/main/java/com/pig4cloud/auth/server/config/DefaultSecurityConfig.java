@@ -18,7 +18,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class DefaultSecurityConfig {
 
-    // @formatter:off
+	// @formatter:off
     @Bean
     UserDetailsService users() {
         UserDetails user = User.builder()
