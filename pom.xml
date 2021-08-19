@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.2</version>
+		<version>2.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pig4cloud.auth.server</groupId>
@@ -20,9 +20,9 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>org.springframework.security.experimental</groupId>
+			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-oauth2-authorization-server</artifactId>
-			<version>0.1.2</version>
+			<version>0.2.0</version>
 		</dependency>
 
 		<dependency>

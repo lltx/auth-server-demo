@@ -56,7 +56,7 @@ public class AuthServerConfiguration {
         RegisteredClient client = RegisteredClient.withId("pig")
                 .clientId("pig")
                 .clientSecret("{noop}pig")
-                .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantTypes(authorizationGrantTypes -> {
                     authorizationGrantTypes.add(AuthorizationGrantType.AUTHORIZATION_CODE);
                     authorizationGrantTypes.add(AuthorizationGrantType.REFRESH_TOKEN);
