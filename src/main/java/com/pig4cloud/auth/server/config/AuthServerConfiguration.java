@@ -20,11 +20,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.OAuth2TokenFormat;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.server.authorization.InMemoryOAuth2AuthorizationService;
+import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
+import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.security.KeyPair;
@@ -61,6 +66,7 @@ public class AuthServerConfiguration {
                     authorizationGrantTypes.add(AuthorizationGrantType.AUTHORIZATION_CODE);
                     authorizationGrantTypes.add(AuthorizationGrantType.REFRESH_TOKEN);
                 })
+                .tokenSettings(TokenSettings.builder().accessTokenFormat(OAuth2TokenFormat.REFERENCE).build())
                 .redirectUri("https://pig4cloud.com")
                 .build();
         return new InMemoryRegisteredClientRepository(client);
@@ -101,5 +107,13 @@ public class AuthServerConfiguration {
         return new NimbusJwtDecoder(jwtProcessor);
     }
 
+    @Bean
+    public ProviderSettings providerSettings(){
+        return ProviderSettings.builder().build();
+    }
+    @Bean
+    public OAuth2AuthorizationService authorizationService(){
+        return new InMemoryOAuth2AuthorizationService();
+    }
 
 }
