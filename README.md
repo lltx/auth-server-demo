@@ -1,4 +1,11 @@
 
+## 工程化时间
+
+国内第一个基于 spring-authorization-server 的工程化实践， 扩展了 密码模式、短信登录
+
+> https://github.com/pig-mesh/pig
+
+
 ## 授权码认证
 ```shell
 'http://localhost:3000/oauth2/authorize?client_id=pig&client_secret=pig&response_type=code&redirect_uri=https://pig4cloud.com'
